@@ -1,0 +1,56 @@
+*{margin: 0;padding: 0;}
+body {background-color: #808080;}
+li {list-style: none;}
+#picPlay {
+	position: absolute;
+	overflow: hidden;
+}
+#thumbPic {
+	background-color: #ccc;
+	position: absolute;overflow: hidden;
+}
+#thumbPic ul li {opacity: 0.6;filter: alpha(opacity:60);}
+
+@media all and (orientation :landscape) {
+.mainPic{width: 30vw;overflow: hidden;}
+#picPlay {
+	height: 30vw;width: 30vw;left: 35vw;top: 3vw;
+}
+#picPlay ul {position: absolute;}
+#picPlay li {float: left;}
+#picPlay li img {height: 30vw;}
+.prev,.next {
+	position: absolute;
+	height: 3vw;
+	top: 13.5vw;
+	opacity: 0;filter: alpha(opacity:0);
+	z-index: 3000;
+}
+.next {left: 27vw;}
+.leftMark {
+	position: absolute;left: 0;z-index: 3000;
+	height: 30vw;width: 15vw;
+	opacity: 0;filter: alpha(opacity:0);
+}
+.rightMark {
+	position: absolute;left: 15vw;z-index: 3000;
+	height: 30vw;width: 15vw;
+	opacity: 0;filter: alpha(opacity:0);
+}
+#thumbPic {
+	height: 8vw;width: 30vw;left: 35vw;top: 33vw;
+}
+#thumbPic ul {
+	position: absolute;left: 0;top: 0;width: 65.625vw;
+}
+#thumbPic ul li {
+	float: left;height: 7.75vw;width: 9.375vw;
+}
+#thumbPic img {
+	float: left;height: 7.5vw;margin-top: 0.25vw;
+	margin-left: 1.875vw;
+}
+.bg {position: absolute;height: 1.5vw;width: 30vw;top: 28.5vw;background-color: black;opacity: 0.4;filter: alpha(opacity:40); z-index: 2999;}
+.text {position: relative;float: left;font-size: 1vw;color: #ffffff;margin-top: 28.8vw;z-index: 3000;}
+.quan {position: relative;float: right;font-size: 1vw;color: #ffffff;margin-top: 28.8vw;z-index: 3000;}
+}
