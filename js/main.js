@@ -67,7 +67,7 @@ window.onload = function ()
 			oUl.style.left = iTarLeft[curIndex]+'px';
 		}
 		curIndex = curIndex - 1;
-		setMov(oUl,'left',iTarLeft[curIndex],'0');
+		setMov(oUl,'left',iTarLeft[curIndex]);
 	};
 	oBtnNext.onclick=oRightMark.onclick = function () 
 	{
@@ -77,9 +77,10 @@ window.onload = function ()
 			oUl.style.left = iTarLeft[curIndex]+'px';
 		}
 		curIndex = curIndex + 1;
-		setMov(oUl,'left',iTarLeft[curIndex],'0');
+		setMov(oUl,'left',iTarLeft[curIndex]);
 	};
 
+	/*切换缩略图*/
 };
 
 function getStyle(obj,name) 
