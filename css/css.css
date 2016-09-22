@@ -11,8 +11,9 @@ li {list-style: none;}
 }
 #thumbPic ul li {opacity: 0.6;filter: alpha(opacity:60);}
 
+
 @media all and (orientation :landscape) {
-.mainPic{width: 30vw;overflow: hidden;}
+
 #picPlay {
 	height: 30vw;width: 30vw;left: 35vw;top: 3vw;
 }
@@ -51,6 +52,51 @@ li {list-style: none;}
 	margin-left: 1.875vw;
 }
 .bg {position: absolute;height: 1.5vw;width: 30vw;top: 28.5vw;background-color: black;opacity: 0.4;filter: alpha(opacity:40); z-index: 2999;}
-.text {position: relative;float: left;font-size: 1vw;color: #ffffff;margin-top: 28.8vw;z-index: 3000;}
-.quan {position: relative;float: right;font-size: 1vw;color: #ffffff;margin-top: 28.8vw;z-index: 3000;}
+.text {position: relative;float: left;font-family: "microsoft yahei";font-size: 1vw;color: #ffffff;margin-top: 28.6vw;z-index: 3000;}
+.quan {position: relative;float: right;font-family: "microsoft yahei";font-size: 1vw;color: #ffffff;margin-top: 28.6vw;z-index: 3000;}
+}
+
+
+@media all and (orientation :portrait) {
+
+#picPlay {
+	height: 90vw;width: 90vw;left: 5vw;top: 5vw;
+}
+#picPlay ul {position: absolute;}
+#picPlay li {float: left;}
+#picPlay li img {height: 90vw;}
+.prev,.next {
+	position: absolute;
+	height: 20vw;
+	top: 35vw;
+	opacity: 0;filter: alpha(opacity:0);
+	z-index: 3000;
+}
+.next {left: 70vw;}
+.leftMark {
+	position: absolute;left: 0;z-index: 3000;
+	height: 90vw;width: 45vw;
+	opacity: 0;filter: alpha(opacity:0);
+}
+.rightMark {
+	position: absolute;left: 45vw;z-index: 3000;
+	height: 90vw;width: 45vw;
+	opacity: 0;filter: alpha(opacity:0);
+}
+#thumbPic {
+	height: 30vw;width: 90vw;left: 5vw;top: 95vw;
+}
+#thumbPic ul {
+	position: absolute;left: 0;top: 0;
+}
+#thumbPic ul li {
+	float: left;height: 28vw;width: 30vw;
+}
+#thumbPic img {
+	float: left;height: 26vw;margin-top: 2vw;
+	margin-left: 1.25vw;
+}
+.bg {position: absolute;height: 5vw;width: 90vw;top: 85vw;background-color: black;opacity: 0.4;filter: alpha(opacity:40); z-index: 2999;}
+.text {position: relative;float: left;font-family: "microsoft yahei";font-size: 3.5vw;color: #ffffff;margin-top: 85.5vw;z-index: 3000;}
+.quan {position: relative;float: right;font-family: "microsoft yahei";font-size: 3.5vw;color: #ffffff;margin-top: 85.5vw;z-index: 3000;}
 }

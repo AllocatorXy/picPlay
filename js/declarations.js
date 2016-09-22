@@ -39,7 +39,9 @@ function thumbClk()
 		movLeft();
 	}
 	thumbMov();
-	oTxt.innerHTML = imgNotes[aLi[curIndex].readIndex+1]; //更新图片注释信息部分
+	/*更新注释信息部分*/
+	oTxt.innerHTML = imgNotes[aLi[curIndex].readIndex+1]; 
+	oNo.innerHTML = "("+(aLi[curIndex].readIndex)+"/"+(aLi.length/3)+")";
 }
 function thumbOver() 
 {
