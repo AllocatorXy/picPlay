@@ -15,8 +15,6 @@ window.onload = function ()
 	var oTxt = document.getElementsByClassName('text')[0];
 	var oNo = document.getElementsByClassName('quan')[0];
 
-
-
 	oUl.innerHTML = oUl.innerHTML+oUl.innerHTML+oUl.innerHTML;
 	oUl.style.width = oLiWidth*aLi.length+'px';
 	oUl.style.left = -oLiWidth*aLi.length/3+'px';
@@ -25,6 +23,7 @@ window.onload = function ()
 	oUlThumb.style.width = oLiThumbWidth*aLi.length+'px';
 	oUlThumb.style.left = -oLiThumbWidth*(aLi.length/3-1)+'px';
 
+	/*给所有li定义index和给用户看的readIndex*/
 	for (var i = 0; i < aLi.length; i++) 
 	{
 		aLi[i].index = i;
@@ -43,6 +42,8 @@ window.onload = function ()
 			aLi[i].readIndex = aLi[i].index-((aLi.length/3)*2-1);
 		}
 	}
+
+	/*get图片注释*/
 	var imgNotes = getNotes();
 	function getNotes() 
 	{
@@ -56,7 +57,7 @@ window.onload = function ()
 	}
 	oTxt.innerHTML = imgNotes[aLi[curIndex].readIndex+1];
 
-	/*左右按钮*/
+	/*左右按钮显示和隐藏*/
 	oBtnPrev.onmouseover=oLeftMark.onmouseover = function () 
 	{
 		setMov(oBtnPrev,'opacity',100);
@@ -73,63 +74,42 @@ window.onload = function ()
 	{
 		setMov(oBtnNext,'opacity',0);
 	};
-
-	/*主图像操作*/
+	/*主图像左右按键事件*/
 	oBtnPrev.onclick=oLeftMark.onclick = function () 
 	{
-		if (curIndex == 1) //向左到正数第二张图的时候，先重置位置再运动
-		{
-			curIndex = aLi.length/3+1;
-			oUl.style.left = -oLiWidth*curIndex+'px';
-			oUlThumb.style.left = -oLiThumbWidth*(aLi.length/3)+'px';
-		}
 		curIndex = curIndex - 1;
-		setMov(oUl,'left',-oLiWidth*curIndex);
+		movLeft();
 		thumbMov();
+		oTxt.innerHTML = imgNotes[aLi[curIndex].readIndex+1]; //更新图片注释信息部分
 	};
 	oBtnNext.onclick=oRightMark.onclick = function () 
 	{
-		if (curIndex == aLi.length-2) //向右到倒数第二张图的时候，先重置位置再运动
-		{
-			curIndex = aLi.length/3-2;
-			oUl.style.left = -oLiWidth*curIndex+'px';
-			oUlThumb.style.left = -oLiThumbWidth*(aLi.length/3-3)+'px';
-		}
 		curIndex = curIndex + 1;
-		setMov(oUl,'left',-oLiWidth*curIndex);
-		thumbMov();
-		
+		movRight();
+		thumbMov();	
+		oTxt.innerHTML = imgNotes[aLi[curIndex].readIndex+1]; //更新图片注释信息部分
 	};
-
-	/*缩略图操作*/
-	function thumbMov() 
+	/*缩略图事件*/
+	for (var j = 0; j < aLiThumb.length; j++) 
 	{
-		for (var i = 0; i < aLiThumb.length; i++) 
-		{
-			setMov(aLiThumb[i],'opacity',60);
-		}
-
-		setMov(aLiThumb[curIndex],'opacity',100);
-		setMov(oUlThumb,'left',-(curIndex-1)*oLiThumbWidth);
-		oTxt.innerHTML = imgNotes[aLi[curIndex].readIndex+1];
+		aLiThumb[j].onmouseover = thumbOver;
+		aLiThumb[j].onmouseout = thumbOut;
+		aLiThumb[j].onclick = thumbClk;
 	}
 	function thumbClk() 
 	{
-		curIndex = this.index;
-		if (curIndex == 1) //向左到正数第二张图的时候，先重置位置再运动
+		if (this.index > curIndex) 
 		{
-			curIndex = aLi.length/3+1;
-			oUl.style.left = -oLiWidth*(aLi.length/3+2)+'px';
-			oUlThumb.style.left = -oLiThumbWidth*(aLi.length/3+1)+'px';
+			curIndex = this.index;
+			movRight();
 		}
-		if (curIndex == aLi.length-2) //向右到倒数第二张图的时候，先重置位置再运动
+		if (this.index < curIndex) 
 		{
-			curIndex = aLi.length/3-2;
-			oUl.style.left = -oLiWidth*(aLi.length/3-3)+'px';
-			oUlThumb.style.left = -oLiThumbWidth*(aLi.length/3-4)+'px';
+			curIndex = this.index;
+			movLeft();
 		}
-		setMov(oUl,'left',-oLiWidth*curIndex);
 		thumbMov();
+		oTxt.innerHTML = imgNotes[aLi[curIndex].readIndex+1]; //更新图片注释信息部分
 	}
 	function thumbOver() 
 	{
@@ -142,28 +122,40 @@ window.onload = function ()
 			setMov(this,'opacity',60);
 		}
 	}
-	for (var j = 0; j < aLiThumb.length; j++) 
+
+	/*主图像移动函数*/
+	function movRight() 
 	{
-		aLiThumb[j].onmouseover = thumbOver;
-		aLiThumb[j].onmouseout = thumbOut;
-		aLiThumb[j].onclick = thumbClk;
+		if (curIndex == aLi.length-2) //向右到倒数第二张图的时候，先重置大图和小图位置再运动
+		{
+			curIndex = aLi.length/3-2;
+			oUl.style.left = -oLiWidth*(aLi.length/3-3)+'px';
+			oUlThumb.style.left = -oLiThumbWidth*(aLi.length/3-4)+'px';
+		}
+		setMov(oUl,'left',-oLiWidth*curIndex); //右移大图
+	}
+	function movLeft() 
+	{
+		if (curIndex == 1) //向左到倒数第二张图的时候，先重置大图和小图位置再运动
+		{
+			curIndex = aLi.length/3+1;
+			oUl.style.left = -oLiWidth*(aLi.length/3+2)+'px';
+			oUlThumb.style.left = -oLiThumbWidth*(aLi.length/3+1)+'px';
+		}
+		setMov(oUl,'left',-oLiWidth*curIndex); //左移大图
+	}
+	/*缩略图移动函数*/
+	function thumbMov() 
+	{
+		for (var i = 0; i < aLiThumb.length; i++) 
+		{
+			setMov(aLiThumb[i],'opacity',60);
+		}
+
+		setMov(aLiThumb[curIndex],'opacity',100);
+		setMov(oUlThumb,'left',-(curIndex-1)*oLiThumbWidth);
 	}
 
 };
 
-function getStyle(obj,name) 
-{
-	
-	if (obj.currentStyle) 
-	{
-		//IE低版本
-		return obj.currentStyle[name];
-	}
-	else 
-	{
-		//FF等浏览器
-		return getComputedStyle(obj,null)[name]; 
-		//getComputedStyle函数中，第二个参数无用，任意设置
-	}
-}
 
