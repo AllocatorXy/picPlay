@@ -1,6 +1,3 @@
-window.onload = function () 
-{
-	
 
 oUl.innerHTML = oUl.innerHTML+oUl.innerHTML+oUl.innerHTML;
 oUl.style.width = oLiWidth*aLi.length+'px';
@@ -79,5 +76,5 @@ for (var j = 0; j < aLiThumb.length; j++)
 	aLiThumb[j].onclick = thumbClk;
 }
 
-};
+
 
