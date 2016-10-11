@@ -14,6 +14,7 @@ window.onload = function ()
 	var oLiThumbWidth = parseInt(getStyle(aLiThumb[0],'width'));
 	var oTxt = document.getElementsByClassName('text')[0];
 	var oNo = document.getElementsByClassName('quan')[0];
+	var autoPlay = null;
 
 	/*get图片注释*/
 	function getNotes() 
@@ -167,6 +168,34 @@ window.onload = function ()
 		aLiThumb[j].onmouseout = thumbOut;
 		aLiThumb[j].onclick = thumbClk;
 	}
+
+	/*自动播放*/
+	autoPlay = setInterval(function () 
+	{
+		curIndex = curIndex + 1;
+		movRight();
+		thumbMov();	
+		/*更新注释信息部分*/
+		oTxt.innerHTML = imgNotes[aLi[curIndex].readIndex+1]; 
+		oNo.innerHTML = "("+(aLi[curIndex].readIndex)+"/"+(aLi.length/3)+")";
+	}, 3000);
+
+	oDiv.onmouseover = function () 
+	{
+		clearInterval(autoPlay);
+	};
+	oDiv.onmouseout = function () 
+	{
+		autoPlay = setInterval(function () 
+		{
+			curIndex = curIndex + 1;
+			movRight();
+			thumbMov();	
+			/*更新注释信息部分*/
+			oTxt.innerHTML = imgNotes[aLi[curIndex].readIndex+1]; 
+			oNo.innerHTML = "("+(aLi[curIndex].readIndex)+"/"+(aLi.length/3)+")";
+		}, 3000);
+	};
 
 };
 
